@@ -59,8 +59,14 @@ _Preprocessing Steps_
     Examination of boxplots revealed outliers in the 'bmi' (9 outliers) and 'charges' (193 outliers) variables. To address this, a detailed visualization of the boxplots for these two variables was conducted.
     It was decided to replace outlier values with the median value rather than removing outlier data. This approach was chosen to preserve valuable information and maintain a better representation of the data. Additionally, replacing outliers with the median helps mitigate their impact on the mean and standard deviation of the data, which can otherwise result in an unrepresentative mean.
 
-5. **Data Scaling (Normalization)**: To ensure that the numerical variables with different scales in the dataset, such as age, bmi, steps, children, and charges, do not influence the model's performance, data scaling was performed. Normalization (min-max scaling) was chosen as the data scaling technique. This transformation ensures that all features have a uniform value range between 0 and 1, effectively addressing the potential sensitivity of neural networks to input variable scale differences.
-Normalization is particularly crucial for neural networks, as failing to scale input variables can lead to suboptimal model performance. It ensures that the model can learn effectively from features with varying scales without bias.
+5. **Data Scaling (Normalization)**:
+
+   ![image](https://github.com/laurencia7/IntroToML/assets/91892470/d105e21f-e930-4e78-bd98-dd9aefe7ad80)
+
+
+    As seen in descriptive statistics for each variable above is in different scales in the dataset. 
+    To ensure that the numerical variables with different scales in the dataset, such as age, bmi, steps, children, and charges, do not influence the model's performance, data scaling was performed. Normalization (min-max scaling) was chosen as the data scaling technique. This transformation ensures that all features have a uniform value range between 0 and 1, effectively addressing the potential sensitivity of neural networks to input variable scale differences.
+    Normalization is particularly crucial for neural networks, as failing to scale input variables can lead to suboptimal model performance. It ensures that the model can learn effectively from features with varying scales without bias.
 
 **EDA:**
 
