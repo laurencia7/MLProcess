@@ -1,4 +1,4 @@
-**Introduction:**
+## **Introduction:**
 
 In this report, I tackle a critical issue: creating a predictive model for determining whether a health insurance claim should be accepted or declined—a binary classification task.
 
@@ -15,15 +15,15 @@ My approach:
 The aim: Equip the company with a tool to make informed insurance claim decisions, ensuring client well-being and the sustainability of our services.
 
 
-**Dataset & Features:**
+## **Dataset & Features:**
 
 This report details the model's architecture, training, evaluation, and insights gained from applying it to healthcare insurance data in the "insurance.csv" file. 
 
 Here's the sample of the dataset:
 ![image](https://github.com/laurencia7/IntroToML/assets/91892470/dbb9d215-8091-4a3e-930f-55abad4ab3d4)
-```
-_About Dataset_
 
+### About Dataset
+```
 - **age:** Age of the policyholder.
 - **sex:** Gender of the policyholder (female=0, male=1).
 - **bmi:** Body mass index (BMI), providing an understanding of body weight relative to height. It is an objective index of body weight calculated as weight in kilograms divided by the square of height in meters (kg / m^2). Ideally, the BMI falls within the range of 18.5 to 25.
@@ -46,7 +46,7 @@ The dataset has been divided into three sets: training, validation, and testing,
 ```
 The dataset consists of 9 variables with 1338 data records in two data types: integer and float. Notably, no null values were identified in the dataset.
 
-_Preprocessing Steps_
+### Preprocessing Steps
 
 1. **Categorical Encoding**: Categorical variables in the dataset have been converted to numerical data types, enabling their utilization in the model. Consequently, there is no requirement for categorical encoding.
 
@@ -68,7 +68,7 @@ _Preprocessing Steps_
     To ensure that the numerical variables with different scales in the dataset, such as age, bmi, steps, children, and charges, do not influence the model's performance, data scaling was performed. Normalization (min-max scaling) was chosen as the data scaling technique. This transformation ensures that all features have a uniform value range between 0 and 1, effectively addressing the potential sensitivity of neural networks to input variable scale differences.
     Normalization is particularly crucial for neural networks, as failing to scale input variables can lead to suboptimal model performance. It ensures that the model can learn effectively from features with varying scales without bias.
 
-**EDA:**
+## **EDA:**
 
 ![Untitled](https://github.com/laurencia7/IntroToML/assets/91892470/5f05ded9-81be-4cdb-ad3f-8dfd6a8b4673)
 
@@ -98,7 +98,7 @@ From the above pie plot, it is evident that out of 1338 individuals, 783 insuran
 
 From the scatter plot above, it can be observed that policyholders who smoke incur a wide range of insurance charges. However, it is evident that the minimum insurance charge for policyholders who smoke is approximately $10,000. In contrast, for non-smokers, the minimum insurance charge is around $1,000.
 
-**Method:**
+## **Method:**
 
 The model used is a neural network model built using TensorFlow/Keras. It appears to be a feedforward neural network with the following layers:
 
@@ -112,7 +112,7 @@ The model used is a neural network model built using TensorFlow/Keras. It appear
 
 The model is compiled using the Stochastic Gradient Descent (SGD) optimizer with a learning rate of 0.01 and momentum of 0.5 and will be tuned using Grid Search. For classification tasks like this one, 'categorical_crossentropy' is a common choice for the loss function, and 'accuracy' is used as a metric to measure model performance.
 
-**Experiment:**
+## **Experiment:**
 
 Hyperparameter Tuning GridSearch
 
@@ -159,7 +159,7 @@ The addition of Dropout layers and L2 Regularization: L2 Regularization turned o
     'dropout_rate': 0.0,
     'weight_decay': 0.0.
 
-**Result:**
+## **Result:**
 
 ![image](https://github.com/laurencia7/IntroToML/assets/91892470/1567f1ed-09d7-4c73-ae4a-ebdc9a4db1b3)
 
@@ -190,7 +190,7 @@ Recall: 0.8875
 F1-score: 0.8987341772151898
 ```
 
-**Conclusion:**
+## **Conclusion:**
 
 It is evident that the accuracy, precision, recall, and F1-score outcomes after tuning are higher compared to those before tuning. This indicates that the optimized model (achieved by seeking the best hyperparameters through Grid Search) performs better than the model prior to tuning.
 
