@@ -20,16 +20,29 @@ This report details the model's architecture, training, evaluation, and insights
 Here's the sample of the dataset:
 ![image](https://github.com/laurencia7/IntroToML/assets/91892470/dbb9d215-8091-4a3e-930f-55abad4ab3d4)
 
-About Dataset
--age : age of policyholder
--sex: gender of policy holder (female=0, male=1)
--bmi: Body mass index, providing an understanding of body, weights that are relatively high or low relative to height, objective index of body weight (kg / m ^ 2) using the ratio of height to weight, ideally 18.5 to 25
--steps: average walking steps per day of policyholder
--children: number of children / dependents of policyholder
--smoker: smoking state of policyholder (non-smoke=0;smoker=1)
--region: the residential area of policyholder in the US (northeast=0, northwest=1, southeast=2, southwest=3)
--charges: individual medical costs billed by health insurance
--insuranceclaim: yes=1, no=0
+***About Dataset***
+
+- **age:** Age of the policyholder.
+
+- **sex:** Gender of the policyholder (female=0, male=1).
+
+- **bmi:** Body mass index (BMI), providing an understanding of body weight relative to height. It is an objective index of body weight calculated as weight in kilograms divided by the square of height in meters (kg / m^2). Ideally, the BMI falls within the range of 18.5 to 25.
+
+- **steps:** Average number of walking steps per day taken by the policyholder.
+
+- **children:** Number of children or dependents of the policyholder.
+
+- **smoker:** Smoking status of the policyholder (non-smoker=0; smoker=1).
+
+- **region:** The residential area of the policyholder in the United States, categorized as follows: 
+    - Northeast=0
+    - Northwest=1
+    - Southeast=2
+    - Southwest=3
+
+- **charges:** Individual medical costs billed by health insurance.
+
+- **insuranceclaim:** Binary variable indicating whether an insurance claim has been made, with "yes" represented as 1 and "no" as 0.
 
 The dataset has been divided into three sets: training, validation, and testing, with an 80% training, 10% validation, and 10% testing distribution. The data split is as follows:
 
