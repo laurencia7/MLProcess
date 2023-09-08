@@ -21,21 +21,15 @@ Here's the sample of the dataset:
 ![image](https://github.com/laurencia7/IntroToML/assets/91892470/dbb9d215-8091-4a3e-930f-55abad4ab3d4)
 
 About Dataset
-age : age of policyholder
-sex: gender of policy holder (female=0, male=1)
-bmi: Body mass index, providing an understanding of body, weights that are relatively high or low relative to height, objective index of body weight (kg / m ^ 2) using the ratio of height to weight, ideally 18.5 to 25
-steps: average walking steps per day of policyholder
-children: number of children / dependents of policyholder
-smoker: smoking state of policyholder (non-smoke=0;smoker=1)
-region: the residential area of policyholder in the US (northeast=0, northwest=1, southeast=2, southwest=3)
-charges: individual medical costs billed by health insurance
-insuranceclaim: yes=1, no=0
-
-**Dataset & Features:**
-
-In this section, we will describe the dataset and the preprocessing steps undertaken for our healthcare insurance claim prediction model.
-
-**Dataset Description:**
+        age : age of policyholder
+        sex: gender of policy holder (female=0, male=1)
+        bmi: Body mass index, providing an understanding of body, weights that are relatively high or low relative to height, objective index of body weight (kg / m ^ 2) using the ratio of height to weight, ideally 18.5 to 25
+        steps: average walking steps per day of policyholder
+        children: number of children / dependents of policyholder
+        smoker: smoking state of policyholder (non-smoke=0;smoker=1)
+        region: the residential area of policyholder in the US (northeast=0, northwest=1, southeast=2, southwest=3)
+        charges: individual medical costs billed by health insurance
+        insuranceclaim: yes=1, no=0
 
 The dataset has been divided into three sets: training, validation, and testing, with an 80% training, 10% validation, and 10% testing distribution. The data split is as follows:
 
@@ -45,7 +39,7 @@ The dataset has been divided into three sets: training, validation, and testing,
 
 The dataset consists of 9 variables with 1338 data records in two data types: integer and float. Notably, no null values were identified in the dataset.
 
-**Preprocessing Steps:**
+**Preprocessing Steps**
 
 1. **Categorical Encoding**: Categorical variables in the dataset have been converted to numerical data types, enabling their utilization in the model. Consequently, there is no requirement for categorical encoding.
 
