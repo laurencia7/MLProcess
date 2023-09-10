@@ -1,31 +1,3 @@
-## **Introduction:**
-
-In this report, I tackle a critical issue: creating a predictive model for determining whether a health insurance claim should be accepted or declined—a binary classification task.
-
-Why it matters:
-
-1. **Cost Control:** Accurate predictions assist insurers in estimating healthcare costs, enabling them to set competitive premiums while maintaining profitability.
-
-2. **Resource Allocation:** Healthcare providers use predictions to allocate resources efficiently, ensuring adequate staffing and equipment.
-
-3. **Timeliness and Fairness:** Predictive models enable swift, consistent claim decisions, enhancing customer satisfaction and trust in insurers.
-
-4. **Fraud Detection:** Models help detect fraudulent claims, reducing financial losses and safeguarding the integrity of insurance systems.
-
-5. **Enhanced Patient Outcomes:** Models aid in tailoring cost-effective treatments, optimizing patient care.
-
-6. **Operational Efficiency:** Streamlined claim processing reduces administrative costs and accelerates approvals.
-
-In conclusion, predictive models streamline insurance operations, benefitting insurers, healthcare providers, and policyholders. They ensure cost-effective, efficient, and compliant processes, contributing to industry sustainability and competitiveness.
-
-My approach:
-- I've developed a neural network using TensorFlow/Keras.
-- The model has an input layer, two hidden layers with ReLU activations, and an output layer with softmax activation.
-- It's optimized with SGD (learning rate: 0.01, momentum: 0.5), using 'categorical_crossentropy' loss and 'accuracy' metric.
-
-The aim: Equip the company with a tool to make informed insurance claim decisions, ensuring client well-being and the sustainability of our services.
-
-
 ## **Dataset & Features:**
 
 This report details the model's architecture, training, evaluation, and insights gained from applying it to healthcare insurance data in the "insurance.csv" file. 
@@ -79,36 +51,6 @@ The dataset consists of 9 variables with 1338 data records in two data types: in
     To ensure that the numerical variables with different scales in the dataset, such as age, bmi, steps, children, and charges, do not influence the model's performance, data scaling was performed. Normalization (min-max scaling) was chosen as the data scaling technique. This transformation ensures that all features have a uniform value range between 0 and 1, effectively addressing the potential sensitivity of neural networks to input variable scale differences.
     Normalization is particularly crucial for neural networks, as failing to scale input variables can lead to suboptimal model performance. It ensures that the model can learn effectively from features with varying scales without bias.
 
-## **EDA:**
-
-![Untitled](https://github.com/laurencia7/IntroToML/assets/91892470/5f05ded9-81be-4cdb-ad3f-8dfd6a8b4673)
-
-In the plot above, it is evident that the distribution of policyholders is highest around a BMI of approximately 30.
-
-![Untitled](https://github.com/laurencia7/IntroToML/assets/91892470/a26afca2-5779-4c9d-b1e5-a442278bb9b3)
-
-From the plot above, it can be observed that the majority of policyholders are in their twenties.
-
-```
-Category  Count Representation
-    Male    676              1
-  Female    662              0
-```
-
-From the table above, it can be observed that the gender distribution of insurance policyholders is almost balanced between females and males. The number of males is slightly higher than females, but the difference is relatively small.
-
-![image](https://github.com/laurencia7/IntroToML/assets/91892470/447f2f51-f071-47cd-a9ed-54c2c15febb7)
-
-From the bar plot above, it is evident that according to the dataset from insurance.csv, the majority of insurance policyholders reside in the southeastern region of the USA.
-
-![Untitled](https://github.com/laurencia7/IntroToML/assets/91892470/9f304c26-631c-42a3-8c46-d3aaa9d49a6c)
-
-From the above pie plot, it is evident that out of 1338 individuals, 783 insurance policyholders had their claims accepted, while 555 insurance policyholders had their claims denied.
-
-![Untitled](https://github.com/laurencia7/IntroToML/assets/91892470/6658dae8-536f-47d8-bdb3-2c418faa0cd9)
-
-From the scatter plot above, it can be observed that policyholders who smoke incur a wide range of insurance charges. However, it is evident that the minimum insurance charge for policyholders who smoke is approximately $10,000. In contrast, for non-smokers, the minimum insurance charge is around $1,000.
-
 ## **Method:**
 
 The model used is a neural network model built using TensorFlow/Keras. It appears to be a feedforward neural network with the following layers:
@@ -133,28 +75,50 @@ The reason behind my choice of approach is that grid search systematically evalu
 
 Furthermore, the grid search technique is straightforward to implement, especially for machine learning models that are not overly complex.
 
-To improve the model's performance, several approaches can be undertaken, such as:
+```
+from keras.wrappers.scikit_learn import KerasClassifier
+from sklearn.model_selection import GridSearchCV
+from keras.layers import Dense, Dropout
+from sklearn.metrics import make_scorer
 
-1. Adding or reducing layers in the model.
-2. Modifying the number of neurons in each layer.
-3. Adjusting the learning rate in the optimizer.
-4. Employing regularization techniques like dropout or L2 regularization.
-5. Choosing a more appropriate evaluation metric.
+def create_model(optimizer='sgd', learn_rate=0.01, momentum=0.5, dropout_rate=0.0, weight_decay=0.0):
+    model = Sequential()
+    model.add(Dense(16, input_dim=8, activation='relu'))
+    model.add(Dropout(dropout_rate))
+    model.add(Dense(16, activation='relu', kernel_regularizer=l2(weight_decay)))
+    model.add(Dropout(dropout_rate))
+    model.add(Dense(16, activation='relu', kernel_regularizer=l2(weight_decay)))
+    model.add(Dropout(dropout_rate))
+    model.add(Dense(2, activation='softmax'))
 
-Here are some changes that can be made to the baseline architecture to enhance its performance:
+    if optimizer == 'sgd':
+        opt = keras.optimizers.SGD(learning_rate=learn_rate, momentum=momentum)
+    elif optimizer == 'adam':
+        opt = keras.optimizers.Adam(learning_rate=learn_rate)
+    else:
+        raise ValueError('Invalid optimizer')
 
-1. Adding Dropout layer: A Dropout layer can aid in preventing overfitting by randomly deactivating neurons during training. This helps the model learn more generalized features from the data.
+    model.compile(optimizer=opt, loss='categorical_crossentropy', metrics=['accuracy'])
+    return model
 
-2. Adding Dense layer: Incorporating a Dense layer can help the model grasp more intricate features from the data.
+model = KerasClassifier(build_fn=create_model, verbose=2)
 
-3. Switching to the Adam optimizer: The Adam optimizer is a widely used optimizer in deep learning and often yields better results compared to the SGD optimizer.
+# Grid search parameters
+batch_size = [16, 32]
+epochs = [10, 20]
+optimizer = ['sgd', 'adam']
+learn_rate = [0.001, 0.01, 0.1]
+momentum = [0.3, 0.5, 0.9]
+dropout_rate = [0.0, 0.2]
+weight_decay = [0.0, 0.001]
 
-4. Reducing the number of neurons in Dense layers: In some cases, an excessive number of neurons in Dense layers can lead to overfitting. Thus, reducing the number of neurons in Dense layers could help prevent overfitting.
+param_grid = dict(batch_size=batch_size, epochs=epochs, optimizer=optimizer, learn_rate=learn_rate, momentum=momentum, dropout_rate=dropout_rate, weight_decay=weight_decay)
+grid = GridSearchCV(estimator=model, param_grid=param_grid, n_jobs=-1, cv=3)
+grid_result = grid.fit(X_train, y_train)
 
-5. Applying L2 Regularization: L2 Regularization is a technique that assists in preventing overfitting by adding a penalty to large weights.
-
-Since we have a dataset with a relatively small number of features and a sufficient number of samples, adding layers and neurons might help the model grasp more complex features from the data. Meanwhile, dropout and L2 regularization could aid in preventing overfitting. Changing the optimizer to Adam might also improve the model's performance. However, these changes will be combined with grid search techniques to obtain optimal parameters.
-
+# summarize
+print("Best: %f using %s" % (grid_result.best_score_, grid_result.best_params_))
+```
 ![image](https://github.com/laurencia7/IntroToML/assets/91892470/e38fa25c-126a-4428-905a-935551d05ad6)
 
 
@@ -200,8 +164,6 @@ Precision: 0.9102564102564102
 Recall: 0.8875
 F1-score: 0.8987341772151898
 ```
-
-## **Conclusion:**
 
 It is evident that the accuracy, precision, recall, and F1-score outcomes after tuning are higher compared to those before tuning. This indicates that the optimized model (achieved by seeking the best hyperparameters through Grid Search) performs better than the model prior to tuning.
 
