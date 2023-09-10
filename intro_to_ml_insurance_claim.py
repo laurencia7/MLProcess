@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Intro to ML: Insurance Claim.ipynb
+"""ML Process: Insurance Claim.ipynb
 """
 
 import pandas as pd
